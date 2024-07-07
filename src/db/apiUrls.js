@@ -1,7 +1,7 @@
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function getUrls(user_id) {
-    const { data, error} = await supabase
+    const { data, error } = await supabase
     .from("urls")
     .select("*")
     .eq("user_id", user_id);
@@ -15,7 +15,7 @@ export async function getUrls(user_id) {
 }
 
 export async function deleteUrl(id) {
-    const { data, error} = await supabase
+    const { data, error } = await supabase
     .from("urls")
     .delete()
     .eq("id", id);
@@ -29,22 +29,22 @@ export async function deleteUrl(id) {
 }
 
 export async function createUrl({title, longUrl, customUrl, user_id}, qrcode) {
-    const short_url = Math.random().toString(36).substring(2,6)
-    const fileName = `qr-${short_url}`
+    const short_url = Math.random().toString(36).substring(2,6);
+    const fileName = `qr-${short_url}`;
     const { error:storageError } = await supabase.storage
-    .from("qrs")
-    .upload(fileName, qrcode);
+      .from("qrs")
+      .upload(fileName, qrcode);
 
     if (storageError) throw new Error(storageError.message);
  
     const qr = `${supabaseUrl}/storage/v1/object/public/qrs/${fileName}`;
 
-    const { data, error} = await supabase.from("urls").insert([
+    const { data, error } = await supabase.from("urls").insert([
     {
         title,
+        user_id,
         original_url: longUrl,
         custom_url: customUrl || null,
-        user_id,
         short_url,
         qr
     }
@@ -59,7 +59,7 @@ export async function createUrl({title, longUrl, customUrl, user_id}, qrcode) {
 }
 
 export async function getLongUrl(id) {
-    const { data, error} = await supabase
+    const { data, error } = await supabase
     .from("urls")
     .select("id, original_url")
     .or(`short_url.eq.${id},custom_url.eq.${id}`)
