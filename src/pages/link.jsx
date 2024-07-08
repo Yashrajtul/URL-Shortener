@@ -65,11 +65,11 @@ const Link = () => {
             {url?.title}
           </span>
           <a
-            href={`https://trimrr.in/${link}`}
+            href={`https://trimrr.onrender.com/${link}`}
             target="_blank"
             className="text-3xl font-bold text-blue-400 cursor-pointer sm:text-4xl hover:underline"
           >
-            https://trimrr.in/{link}
+            https://trimrr.onrender.com/{link}
           </a>
           <a
             href={url?.original_url}
@@ -86,7 +86,7 @@ const Link = () => {
             <Button
               variant="ghost"
               onClick={() =>
-                navigator.clipboard.writeText(`https://trimrr.in/${url?.short_url}`)
+                navigator.clipboard.writeText(`https://trimrr.onrender.com/${url?.short_url}`)
               }>
               <Copy />
             </Button>

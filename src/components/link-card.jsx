@@ -34,7 +34,7 @@ const LinkCard = ({ url, fetchUrls }) => {
             <Link to={`/link/${url?.id}`} className="flex flex-col flex-1">
                 <span className="text-3xl font-extrabold cursor-pointer hover:underline">{url?.title}</span>
                 <span className="text-2xl font-bold text-blue-400 cursor-pointer hover:underline">
-                    https://trimrr.in/{url?.custom_url ? url?.custom_url : url.short_url}
+                    https://trimrr.onrender.com/{url?.custom_url ? url?.custom_url : url.short_url}
                 </span>
                 <span className="flex items-center gap-1 cursor-pointer hover:underline">{url?.original_url}</span>
                 <span className="flex items-end flex-1 text-sm font-extralight">{new Date(url?.created_at).toLocaleString()}</span>
@@ -44,7 +44,7 @@ const LinkCard = ({ url, fetchUrls }) => {
                 <Button
                     variant="ghost"
                     onClick={() =>
-                        navigator.clipboard.writeText(`https://trimrr.in/${url?.short_url}`)
+                        navigator.clipboard.writeText(`https://trimrr.onrender.com/${url?.short_url}`)
                     }>
                     <Copy />
                 </Button>
